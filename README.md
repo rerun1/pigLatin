@@ -5,52 +5,39 @@
 
 ## Description
 
+Behavior — Plain English:	Input	/ Output
 
-How Pig Latin Works
-First, here are the rules of Pig Latin:
+The program does nothing to non-alphabetical characters, since they do not contain consonants or vowels:	3 =	3
 
-For words beginning with a vowel, add "way" to the end.
+The program adds “ay” to single-letter word I:	i	= iay
 
-For words beginning with one or more consonants, move all of the first consecutive consonants to the end, and add "ay".
+The program adds “way” to the single letter word a:	a =	aay
 
-If the first consonants include "qu", move the "u" along with the "q". Don't forget about words like "squeal" where "qu" doesn't come first!
+The program recognizes multiple-letter word beginning with a vowel and adds “way” to the end of the word:	end =	endway
 
-For words beginning with "y", treat "y" as a consonant.
+The program recognizes multiple words in a sentence that begin with a vowel and adds “way” to the end of each word:	end of	= endway ofway
 
-Instructions
-Before writing any code, make a list of specs detailing each behavior your program will have. Start with the simplest possible behavior, and slowly move up in complexity. To get you started, the first two specs are provided below.
+The program recognizes a word beginning with y, treats the y as a consonant and moves it to the end of the word, adding "ay":	yellow = ellowyay
 
-Have at least two other pairs check your specs before you begin coding. Ensure that each possible behavior is represented by a spec, and that they are ordered from simplest to most complex.
+The program recognizes a word beginning with one consonant, moves the consonant to the end, and adds "ay":	talk =	alktay
 
-Place your specs (and their example inputs and outputs) in your project's README.
+The program recognizes a word beginning with two consonants, moves the consonants to the end, and adds "ay":	blend =	endblay
 
-Create a basic user interface that allows your application to accept user input, and display output. This will allow us to manually test each spec.
+The program recognizes a word beginning with three consonants, moves the consonants to the end, and adds "ay":	three =	eethray
 
-Slowly add business logic. Begin by focusing on the behavior outlined in your first, most simple spec. Implement the least amount of logic necessary to create this behavior.
+The program recognizes if the first consonant in a word includes a “q”, then checks for a following “u” and moves both the “q” and the “u” together to the end of the word followed by “ay”:	quiet	= ietquay
 
-Manually test this behaviour by inputting the example input described by the spec into your application, and confirm you receive the correct output.
+The program recognizes if there is a consonant before a “qu” in the beginning of a word and moves the consonant along with the “qu” to the end of the word followed by “ay”:	squeal = ealsquay
 
-Once behavior outlined by the first spec is successfully implemented, repeat steps 5 - 7 for each subsequent spec. Do not move onto the next spec until the previous one passes.
+The program adds “ay” to single-letter word I and makes sure it stays a capital I, since that would be the only usage of the single-letter word “I”:	I = Iay
 
-Helpful Hints
-When you get to consonants, don't try to solve it all at once. Instead, start with an example of a word that only has one consonant; then a word with two consonants; then a word with three; and then tackle the exceptions to the rule, like "qu" and "y". Once your application can successfully translate single words, work on translating entire sentences.
+The program keeps capitalization in place for one word:	Pig	= igPay
 
-Although you're welcome to solve the problem however you'd like, there are a few methods that would be handy:
+The program keeps capitalization in place for multiple words:	Pig Latin	= igPay atinLay
 
-String.prototype.slice()
-String.prototype.includes()
-String.prototype.indexOf()
-Take a look at this and other documentation to gather the tools you'll need before you try to fulfill your specs.
+The the program keeps punctuation in place in single words:	What’s = at’sWhay
+The the program keeps punctuation in place for sentences or clauses:	What’s up?	= at’sWhay upway?
 
-Specs
-To get you started, below are the first two "plain English" specs:
-
-The program does nothing to non-alphabetical characters, since they do not contain consonants or vowels.
-Example Input: 3
-Example Output: 3
-The program adds "ay" to single-letter words beginning with a vowel.
-Example Input: i
-Example Output: iay
 
 <br>
 
