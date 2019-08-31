@@ -1,14 +1,14 @@
 var userString = "";
-var pigLatinMap = [];
+var pigLatinStepOne = [];
 var pigLatinString = "";
-var pigLatinDoubleConsonants = [];
-var pigLatinDoubleString = "";
+var pigLatinStepTwo = [];
 var punctuationFix = [];
-var punctionFixToString = "";
+var result = "";
+
 
 var pigLatin = function(string) {
 	var stringArray = string.split(" ");
-	pigLatinMap = stringArray.map(function(element){
+	pigLatinStepOne = stringArray.map(function(element){
 		for (var i = 0; i < stringArray.length; i += 1 ) {
 			if (element === "I") {
 				return "Iay"
@@ -127,16 +127,8 @@ var pigLatin = function(string) {
 			}
 		}
 	});
-}
-
-var pigLatinToString = function(){
-	pigLatinString = pigLatinMap.join(" ");
-}
-
-var pigLatinDouble = function(string) {
-	var stringArray = string.split(" ");
-	pigLatinDoubleConsonants = stringArray.map(function(element){
-		for (var i = 0; i < stringArray.length; i += 1 ) {
+	pigLatinStepTwo = pigLatinStepOne.map(function(element){
+		for (var i = 0; i < pigLatinStepOne.length; i += 1 ) {
 			if (element[0] === "b"){
 				return element.slice(1).replace("ay", "bay");
 			} else if (element[0] === "c"){
@@ -180,11 +172,7 @@ var pigLatinDouble = function(string) {
 			}
 		}
 	});
-}
-
-
-var punctuation = function(array){
-	array.forEach(function(word){
+	pigLatinStepTwo.forEach(function(word){
 		var wordFix = "";
 		if (word.includes("?")) {
 			wordFix = word.slice(word.indexOf("?"), (word.indexOf("?") + 1));
@@ -205,40 +193,29 @@ var punctuation = function(array){
 			punctuationFix.push(word);
 		}
 	});
+	result = punctuationFix.join(" ");
+	return result;
 }
-
-var pigDoubleToString = function(){
-	pigLatinDoubleString = pigLatinDoubleConsonants.join(" ");
-}
-
-var punctuationFixer = function(){
-	punctionFixToString = punctuationFix.join(" ");
+var resetForm = function(){
+	$("input#userSentence").val("");
 }
 
 $(document).ready(function(){
 	$("form#enterSentence").submit(function(event){
-  	event.preventDefault();
 
-    userString = "";
+		punctuationFix = [];
 
-    $("p#pigLatin").empty();
+    $("p#pigLatinText").empty();
 
     userString = $("input#userSentence").val();
 
 		pigLatin(userString);
 
-		pigLatinToString();
+		$("p#pigLatinText").text(result);
 
-		pigLatinDouble(pigLatinString);
-
-		pigDoubleToString();
-
-		punctuation(pigLatinDoubleConsonants);
-
-		punctuationFixer();
-
-		$("p#pigLatin").text(punctionFixToString);
-
+		resetForm();
+		
+		event.preventDefault();
   });
 
 });
